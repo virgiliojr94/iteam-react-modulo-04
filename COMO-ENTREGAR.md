@@ -1,55 +1,82 @@
 # Como entregar as atividades
 
-A entrega possui **duas evidências**:
+A entrega do Módulo 04 acontece no **seu repositório pessoal do My Daily Habits**.
 
-1. o código funcionando dentro de `my-daily-habits`;
-2. um arquivo Markdown curto em `evidencias/`.
+Este repositório do curso serve apenas como mapa, apoio e fonte dos exercícios. Você não entrega código aqui.
 
-## No primeiro dia
+---
 
-Depois do primeiro `push`, abra um Pull Request do seu fork para o repositório da turma.
+## O que o professor precisa receber
 
-Título:
-
-```text
-Entrega — Nome Completo
-```
-
-Descrição:
+Envie ao professor o link do seu repositório:
 
 ```text
-Aluno: Nome Completo
-GitHub: @usuario
-
-Este Pull Request acompanhará minhas entregas durante o Módulo 04.
+https://github.com/seu-usuario/my-daily-habits
 ```
 
-**Não feche o Pull Request.**
+Esse mesmo repositório será usado durante todo o módulo.
 
-Você continuará usando o mesmo PR nas próximas aulas.
+---
 
-## Evidência de cada aula
+## Uma entrega por aula
 
-Copie:
+Cada aula termina com um commit que representa a pequena evolução daquele dia.
+
+Exemplos:
 
 ```text
-templates/EVIDENCIA.md
+feat: cria primeira versão do My Daily Habits
+refactor: organiza hábitos em componentes
+feat: adiciona comunicação entre componentes
+feat: adiciona estado aos hábitos
 ```
 
-para:
+Não precisa criar outro repositório para a aula seguinte. Continue sempre no mesmo projeto.
 
-```text
-alunos/seu-nome-completo/evidencias/aula-XX.md
+---
+
+## Antes de entregar
+
+Primeiro confirme que o projeto funciona:
+
+```bash
+npm run dev
 ```
 
-Preencha apenas o necessário.
+Depois confira o que mudou:
 
-## O professor observará
+```bash
+git status
+```
 
-- se o delta solicitado foi implementado;
-- se o projeto continua funcionando;
-- se o commit corresponde à atividade;
-- se a evidência é suficiente para demonstrar o resultado;
-- se você consegue explicar o que alterou.
+Registre a entrega:
 
-> Não é necessário escrever um relatório longo. Evidência boa é curta, específica e verificável.
+```bash
+git add .
+git commit -m "feat: descreva a entrega da aula"
+git push
+```
+
+Por fim, abra seu repositório no navegador e confirme que o commit está visível.
+
+---
+
+## Critério mínimo de entrega
+
+O professor observará:
+
+- se o projeto continua executando;
+- se a funcionalidade pedida na aula está presente;
+- se o commit correspondente à aula aparece no GitHub;
+- se o repositório enviado é o seu `my-daily-habits`;
+- se você consegue explicar, de forma simples, o que alterou.
+
+Não é necessário criar relatório, pasta de evidência ou Pull Request.
+
+---
+
+## Se ainda tiver dúvida com Git
+
+Consulte [`GUIA-GITHUB.md`](./GUIA-GITHUB.md).
+
+Ele mostra apenas o fluxo usado neste módulo: `clone`, `status`, `add`, `commit` e `push` no seu repositório pessoal.

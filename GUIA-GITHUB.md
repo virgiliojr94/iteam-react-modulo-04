@@ -1,151 +1,162 @@
-# Guia GitHub — passo a passo da turma
+# Guia GitHub — My Daily Habits
 
-Este guia foi escrito para quem ainda não trabalha com Git/GitHub no dia a dia.
+> **Este guia é para o seu repositório pessoal do My Daily Habits.**
+> Você não deve fazer commit neste repositório do curso.
 
-## 1. Faça o fork
-
-Na página do repositório da turma:
-
-1. clique em **Fork**;
-2. confirme a criação na sua conta;
-3. abra o repositório que foi criado no seu GitHub.
-
-Você fará isso **uma única vez**.
+A proposta aqui é ensinar somente o mínimo de Git/GitHub necessário para registrar e entregar o projeto durante o Módulo 04. Branches, Pull Requests, CI e outros fluxos entram no Módulo 11.
 
 ---
 
-## 2. Clone o seu fork
+## 1. Crie sua conta no GitHub
 
-No seu fork, copie a URL HTTPS.
+Se ainda não tiver conta, crie uma em:
 
-No terminal:
+https://github.com/
+
+Use uma conta que você consiga acessar durante todas as aulas.
+
+---
+
+## 2. Crie o repositório do projeto
+
+No seu GitHub, crie um repositório chamado:
+
+```text
+my-daily-habits
+```
+
+Este será o repositório usado até o fim do módulo.
+
+> Não crie um projeto novo a cada aula. Cada encontro continua a partir da versão funcional da aula anterior.
+
+---
+
+## 3. Clone o seu repositório
+
+Copie a URL HTTPS do seu próprio repositório e execute:
 
 ```bash
-git clone URL-DO-SEU-FORK
-cd iteam-react-modulo-04
+git clone URL-DO-SEU-REPOSITORIO
+cd my-daily-habits
 ```
 
 Exemplo:
 
 ```bash
-git clone https://github.com/seu-usuario/iteam-react-modulo-04.git
-cd iteam-react-modulo-04
+git clone https://github.com/seu-usuario/my-daily-habits.git
+cd my-daily-habits
 ```
+
+Depois disso, trabalhe sempre dentro dessa pasta.
 
 ---
 
-## 3. Configure o repositório da turma como `upstream`
+## 4. Arquivos que não devem ir para o GitHub
 
-Execute uma única vez:
+No arquivo `.gitignore`, mantenha pelo menos:
 
-```bash
-git remote add upstream https://github.com/virgiliojr94/iteam-react-modulo-04.git
+```gitignore
+node_modules
+dist
+.env
+.env.*
+!.env.example
 ```
 
-Confira:
+`node_modules` contém dependências instaladas localmente. `dist` é gerado pelo build. Arquivos `.env` podem conter configurações locais e não devem ser enviados por engano.
 
-```bash
-git remote -v
+Crie também:
+
+```text
+.env.example
 ```
 
-Você deverá enxergar:
+com:
 
-- `origin` → seu fork;
-- `upstream` → repositório da turma.
+```env
+VITE_API_BASE_URL=
+```
+
+O `.env.example` documenta o nome da variável, mas não guarda senha, token ou chave privada.
 
 ---
 
-## 4. Crie sua pasta
+## 5. Como registrar o trabalho de cada aula
 
-Use seu nome completo em minúsculas, sem acentos, trocando espaços por hífens.
-
-Exemplo:
-
-```text
-alunos/maria-de-souza-silva/
-```
-
-Dentro dela:
-
-```text
-alunos/maria-de-souza-silva/
-├── README.md
-├── evidencias/
-└── my-daily-habits/
-```
-
-Copie `templates/ALUNO.md` para o seu `README.md`.
-
----
-
-# Rotina de TODA aula
-
-## Antes de começar
-
-Baixe o que o professor liberou:
-
-```bash
-git pull --no-rebase upstream main
-```
-
-Depois envie essa atualização também para o seu fork:
-
-```bash
-git push origin main
-```
-
-A nova atividade aparecerá em:
-
-```text
-atividades/aula-XX/README.md
-```
-
-## Durante a atividade
-
-Trabalhe somente dentro da sua pasta:
-
-```text
-alunos/seu-nome-completo/
-```
-
-O projeto React permanece em:
-
-```text
-alunos/seu-nome-completo/my-daily-habits/
-```
-
-## Ao terminar
-
-Confira o que mudou:
+Antes de criar o commit, veja o que mudou:
 
 ```bash
 git status
 ```
 
-Registre:
+Adicione as mudanças:
 
 ```bash
 git add .
-git commit -m "atividade XX: resumo curto"
-git push origin main
 ```
 
-O Pull Request aberto no primeiro dia será atualizado automaticamente.
+Crie o commit:
+
+```bash
+git commit -m "feat: descreva a entrega da aula"
+```
+
+Envie para o seu GitHub:
+
+```bash
+git push
+```
+
+Depois abra **o seu repositório `my-daily-habits` no navegador** e confirme que o commit apareceu.
 
 ---
 
-## Se algo der errado
+## 6. Exemplos de mensagens de commit
 
-Não apague arquivos aleatoriamente.
+Use mensagens curtas que expliquem o que passou a funcionar.
 
-Execute primeiro:
+```text
+feat: cria primeira versão do My Daily Habits
+refactor: organiza hábitos em componentes
+feat: adiciona comunicação entre componentes
+feat: adiciona estado aos hábitos
+feat: adiciona formulário de hábitos
+```
+
+O texto pode mudar de acordo com a atividade. O importante é que a mensagem descreva a entrega daquele encontro.
+
+---
+
+## 7. Se algo der errado
+
+Primeiro execute:
 
 ```bash
 git status
 ```
 
-e mostre ao professor:
+Depois registre três coisas:
 
-- o comando executado;
-- a mensagem completa;
-- o que você esperava que acontecesse.
+1. qual comando você executou;
+2. qual mensagem apareceu;
+3. o que você esperava que acontecesse.
+
+Não apague arquivos aleatoriamente para tentar corrigir Git.
+
+---
+
+## Resumo do fluxo
+
+```text
+seu projeto local
+      ↓
+git status
+      ↓
+git add .
+      ↓
+git commit -m "feat: ..."
+      ↓
+git push
+      ↓
+seu repositório My Daily Habits no GitHub
+```

@@ -1,52 +1,79 @@
-# ITEAM — Módulo 04: Desenvolvimento Front-end com React
+# Módulo 04 — Desenvolvimento Front-end com React
 
-Repositório de atividades práticas do Módulo 04.
+Repositório de acompanhamento do módulo.
+**Capacitação em Desenvolvimento Full Stack — ITEAM, Boa Vista/RR**
 
-Durante o módulo, um único projeto evolui aula após aula: **My Daily Habits**.
+---
 
-## Como funciona
+## O que é este repositório
 
-- você faz **um fork** deste repositório;
-- trabalha somente no seu fork;
-- cria sua pasta em `alunos/seu-nome-completo/`;
-- mantém o projeto React dentro dessa pasta;
-- a atividade do dia aparece em `atividades/`;
-- novas atividades são liberadas somente no dia da aula;
-- antes de começar uma nova aula, você atualiza seu fork com o repositório da turma;
-- cada atividade termina com uma evidência simples em Markdown e um commit;
-- você abre **um único Pull Request** no primeiro dia e o mantém aberto durante todo o módulo.
+É o **mapa do módulo**. Uma pasta por aula, com o que você precisa saber antes, o que a aula entrega, onde estudar e o que treinar.
 
-> Não crie um projeto novo a cada aula. Continue sempre a partir da versão funcional da aula anterior.
+**Não é** a apostila. O conteúdo explicado está na apostila; aqui ficam a organização, os exercícios e os critérios para você saber que terminou.
 
-## Estrutura esperada no seu fork
+**Não é** onde você entrega. Sua entrega continua no **seu** repositório do My Daily Habits.
 
-```text
-alunos/
-└── seu-nome-completo/
-    ├── README.md
-    ├── evidencias/
-    │   ├── aula-01.md
-    │   ├── aula-02.md
-    │   └── ...
-    └── my-daily-habits/
-        ├── src/
-        ├── package.json
-        ├── .gitignore
-        └── ...
-```
+Você não precisa clonar nada. Basta navegar pelas pastas aqui pelo navegador.
 
-## Primeiro acesso
+---
 
-Leia primeiro:
+## Como usar
 
-1. [`GUIA-GITHUB.md`](GUIA-GITHUB.md)
-2. [`COMO-ENTREGAR.md`](COMO-ENTREGAR.md)
-3. a atividade liberada em [`atividades/`](atividades/)
+**Antes da aula** — abra a pasta da aula do dia e leia as seções *Você já deve saber* e *O que esta aula entrega*. Cinco minutos.
 
-## Regra principal
+**Depois da aula** — volte, rode o *Critério de pronto* no seu projeto e faça os exercícios.
 
-**A atividade explica somente o delta do dia.**
+**Se ficou para trás** — a seção *Se você travou* de cada aula diz exatamente o que conferir.
 
-Apostila e aula explicam o conceito.  
-LabEx isola a habilidade quando houver laboratório.  
-A atividade aplica essa habilidade ao projeto `My Daily Habits`.
+---
+
+## As 11 aulas
+
+| # | Aula | O projeto passa a ter |
+|---|---|---|
+| [01](./aula-01) | Introdução ao React, Node.js, Vite e primeiro app | projeto criado, três cartões escritos à mão |
+| [02](./aula-02) | Componentes, JSX, renderização condicional, listas e chaves | cartões vindos de dados, com `map()` e `key` |
+| [03](./aula-03) | Props e comunicação entre componentes | dados descem por props; o clique avisa o pai |
+| [04](./aula-04) | Estado com `useState` e o legado das classes | clicar marca e desmarca hábitos |
+| [05](./aula-05) | Eventos e formulários controlados | formulário para cadastrar hábitos novos |
+| [06](./aula-06) | `useEffect` e o ciclo de vida | os hábitos sobrevivem ao recarregar |
+| [07](./aula-07) | Lifting state up, `useContext` e boas práticas | estado organizado e compartilhado |
+| [08](./aula-08) | React Router: rotas, links e navegação | mais de uma página, com menu |
+| [09](./aula-09) | Parâmetros, rotas aninhadas e protegidas | página de detalhe por hábito |
+| [10](./aula-10) | Requisições HTTP com `fetch` e Axios | dados vindos de uma API |
+| [11](./aula-11) | Loading, tratamento de erro e fechamento | espera e falha tratadas na tela |
+
+---
+
+## Projeto do módulo: My Daily Habits
+
+Uma aplicação de acompanhamento de hábitos diários, construída do zero e ampliada em **todas** as aulas. Nunca criamos projeto novo: cada aula continua de onde a anterior parou.
+
+Este mesmo projeto volta no **Módulo 11 (DevOps)**, onde será conteinerizado e publicado.
+
+---
+
+## Onde estudar
+
+| Fonte | Uso |
+|---|---|
+| Apostila do módulo | conteúdo principal, capítulos 1 a 11 |
+| [react.dev/learn](https://react.dev/learn) | documentação oficial, com desafios interativos |
+| [pt-br.react.dev](https://pt-br.react.dev) | mesma documentação em português (tradução em andamento) |
+| STEFANOV, S. *Primeiros passos com React*. Novatec, 2016 | leitura de código legado |
+| ELLIOTT, E. *Composing Software* | princípios de composição e imutabilidade |
+
+> A tradução em português ainda não cobre todas as páginas. Se a página abrir em inglês, ela existe — só ainda não foi traduzida.
+
+---
+
+## Combinados
+
+- Entregue sempre no **seu** repositório, com commit por aula.
+- `node_modules` e `.env` **nunca** entram no commit.
+- Errar faz parte. Ler mensagem de erro é parte do trabalho, não sinal de fracasso.
+- Dúvida que ficou da aula anterior tem prioridade sobre conteúdo novo. Traga.
+
+---
+
+*Professor: Esp. Virgílio do Rego Monteiro Borges Junior*
