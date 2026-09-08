@@ -71,7 +71,7 @@ O professor observará:
 - se o repositório enviado é o seu `my-daily-habits`;
 - se você consegue explicar, de forma simples, o que alterou.
 
-Não é necessário criar relatório, pasta de evidência ou Pull Request.
+Não é necessário criar relatório ou pasta de evidência.
 
 ---
 

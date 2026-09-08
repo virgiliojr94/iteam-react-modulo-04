@@ -3,7 +3,7 @@
 > **Este guia é para o seu repositório pessoal do My Daily Habits.**
 > Você não deve fazer commit neste repositório do curso.
 
-A proposta aqui é ensinar somente o mínimo de Git/GitHub necessário para registrar e entregar o projeto durante o Módulo 04. Branches, Pull Requests, CI e outros fluxos entram no Módulo 11.
+A proposta aqui é ensinar somente o mínimo de Git/GitHub necessário para registrar e entregar o projeto durante o Módulo 04.
 
 ---
 
