@@ -3,6 +3,8 @@
 
 Faça pelo menos os **níveis 1 e 2**. O nível 3 é opcional.
 
+Comece depois de concluir o Passo 6 do [README](./README.md).
+
 Trabalhe sempre no seu **My Daily Habits**. Se quebrar alguma coisa, ótimo: descobrir por que quebrou é metade do aprendizado.
 
 ---
@@ -37,19 +39,27 @@ Faça, um de cada vez, e anote o que aparece na tela:
 
 ### 1.2 — Props são somente leitura
 
-Dentro do `HabitCard`, antes do `return`, escreva:
+No `HabitCard.jsx`, substitua **temporariamente apenas a assinatura da função** pelas linhas abaixo. Mantenha o `return` e o restante do arquivo como estão:
 
 ```jsx
-title = "MUDEI!";
+export default function HabitCard(props) {
+  props.title = "MUDEI!";
+  const {
+    id,
+    title,
+    goal = "Sem meta definida",
+    completed,
+    onShowDetails,
+  } = props;
 ```
 
-Salve e observe.
+Salve e olhe o erro no navegador ou no console. A aplicação pode deixar de exibir os cartões durante este teste.
 
-**Responda:** o que aconteceu? A mudança se manteve? Por quê?
+**Responda:** por que tentar alterar `props.title` falhou? Quem fornece o título ao cartão?
 
-> 💡 O cartão é redesenhado toda vez que o pai renderiza, e o pai sempre envia o valor original de volta. O filho não é dono do dado.
+> 💡 No ambiente de desenvolvimento, o React protege as props contra essa atribuição. A alteração correta começa nos dados que o pai fornece; o filho apenas lê.
 
-**Apague a linha** antes de seguir.
+**Desfaça a mudança:** restaure a assinatura completa do `HabitCard` no Passo 4 do README antes de seguir.
 
 ---
 
@@ -69,9 +79,9 @@ onClick={onShowDetails(id)}
 
 Salve e **recarregue a página sem clicar em nada**.
 
-**Responda:** o alerta apareceu sozinho? Quantas vezes? Por quê?
+**Responda:** o alerta apareceu sem clique? Por que isso acontece durante a renderização?
 
-> 💡 Sem a arrow function, a chamada acontece durante a renderização — e o React renderiza um cartão por hábito.
+> 💡 Sem a arrow function, a chamada acontece enquanto o cartão é renderizado. Em desenvolvimento, a quantidade de alertas pode variar porque uma renderização pode ocorrer mais de uma vez.
 
 **Volte a forma correta.** Este é o erro mais comum da semana; se ele acontecer de novo, você vai reconhecer.
 
@@ -119,7 +129,7 @@ Adicione um quarto objeto ao array em `src/data/habits.js`, com `id` único.
 
 Adicione um quinto hábito **sem a propriedade `goal`**.
 
-**Critério:** o cartão aparece com "Sem meta definida" e a aplicação não quebra.
+**Critério:** o cartão mostra "Sem meta definida" e, ao clicar em "Ver detalhes", o alerta mostra a mesma meta. A aplicação não quebra.
 
 ---
 
@@ -186,7 +196,10 @@ Faça o `Panel` aceitar, além de `children`, uma prop chamada `footer` que rend
 
 ```jsx
 <Panel title="Hábitos de hoje" footer={<small>5 hábitos</small>}>
-  <HabitList ... />
+  <HabitList
+    habits={initialHabits}
+    onShowDetails={handleShowDetails}
+  />
 </Panel>
 ```
 

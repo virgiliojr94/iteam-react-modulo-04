@@ -77,11 +77,356 @@ Nada "volta" pela árvore de componentes. O pai entrega uma função; o filho ap
 
 ---
 
+## Passo a passo no seu projeto
+
+Continue no `my-daily-habits` da Aula 02. Deixe `npm run dev` aberto. Os caminhos abaixo são relativos à pasta do projeto. Faça cada passo antes de seguir para o próximo.
+
+### Passo 1 — Definir uma meta padrão
+
+**Arquivo:** `src/components/HabitCard.jsx`
+
+**Ação:** substitua o arquivo inteiro:
+
+```jsx
+export default function HabitCard({
+  title,
+  goal = "Sem meta definida",
+  completed,
+}) {
+  return (
+    <article className={`habit-card ${completed ? "is-complete" : ""}`}>
+      <div>
+        <h2>{title}</h2>
+        <p>Meta: {goal}</p>
+      </div>
+      <span className="habit-status">
+        {completed ? "Concluído" : "Pendente"}
+      </span>
+    </article>
+  );
+}
+```
+
+**O que é:** o `App` fornece as props; o cartão lê os valores. O padrão de `goal` só entra quando a prop chega como `undefined`.
+
+**Você deve ver:** os mesmos três cartões da Aula 02, com os status preservados.
+
+**Se der erro:** confirme que manteve o `return` inteiro e que `goal` tem o mesmo nome usado em `HabitList`.
+
+### Passo 2 — Criar a ação no pai
+
+**Arquivo:** `src/App.jsx`
+
+**Ação:** substitua o arquivo inteiro:
+
+```jsx
+import "./App.css";
+import HabitList from "./components/HabitList";
+import { initialHabits } from "./data/habits";
+
+export default function App() {
+  const completedCount = initialHabits.filter(
+    (habit) => habit.completed,
+  ).length;
+
+  function handleShowDetails(habitId) {
+    const habit = initialHabits.find((item) => item.id === habitId);
+
+    if (habit) {
+      const goal = habit.goal === undefined
+        ? "Sem meta definida"
+        : habit.goal;
+      window.alert(`${habit.title} — Meta: ${goal}`);
+    }
+  }
+
+  return (
+    <main className="app">
+      <header className="hero">
+        <p className="eyebrow">MY DAILY HABITS</p>
+        <h1>Pequenos hábitos, progresso visível.</h1>
+        <p>
+          {completedCount} de {initialHabits.length} hábitos concluídos.
+        </p>
+      </header>
+
+      <HabitList
+        habits={initialHabits}
+        onShowDetails={handleShowDetails}
+      />
+    </main>
+  );
+}
+```
+
+**O que é:** `handleShowDetails` recebe o `id` do cartão clicado, procura o hábito e escolhe o texto do alerta. Por enquanto, `HabitList` ainda não encaminha a função.
+
+**Você deve ver:** a tela continua igual; nenhum alerta aparece ao carregar.
+
+**Se der erro:** confirme os imports de `HabitList` e `initialHabits` e não execute `handleShowDetails()` durante o `return`.
+
+### Passo 3 — Encaminhar a função pela lista
+
+**Arquivo:** `src/components/HabitList.jsx`
+
+**Ação:** substitua o arquivo inteiro. Mantenha o `import` da primeira linha, ausente no trecho da apostila:
+
+```jsx
+import HabitCard from "./HabitCard";
+
+export default function HabitList({ habits, onShowDetails }) {
+  if (habits.length === 0) {
+    return <p>Nenhum hábito cadastrado.</p>;
+  }
+
+  return (
+    <section className="habit-list" aria-label="Hábitos de hoje">
+      {habits.map((habit) => (
+        <HabitCard
+          key={habit.id}
+          {...habit}
+          onShowDetails={onShowDetails}
+        />
+      ))}
+    </section>
+  );
+}
+```
+
+**O que é:** `{...habit}` envia `id`, `title`, `goal` e `completed` ao cartão. A lista também repassa `onShowDetails`. A `key` continua no elemento criado pelo `map()`.
+
+**Você deve ver:** os três cartões ainda aparecem. O botão será acrescentado no próximo passo.
+
+**Se der erro:** `HabitCard is not defined` indica que faltou o `import HabitCard from "./HabitCard";`.
+
+### Passo 4 — Avisar o pai no clique
+
+**Arquivo:** `src/components/HabitCard.jsx`
+
+**Ação:** substitua o arquivo inteiro:
+
+```jsx
+export default function HabitCard({
+  id,
+  title,
+  goal = "Sem meta definida",
+  completed,
+  onShowDetails,
+}) {
+  return (
+    <article className={`habit-card ${completed ? "is-complete" : ""}`}>
+      <div>
+        <h2>{title}</h2>
+        <p>Meta: {goal}</p>
+      </div>
+      <div className="habit-actions">
+        <span className="habit-status">
+          {completed ? "Concluído" : "Pendente"}
+        </span>
+        <button type="button" onClick={() => onShowDetails(id)}>
+          Ver detalhes
+        </button>
+      </div>
+    </article>
+  );
+}
+```
+
+**O que é:** `onClick` recebe uma função para executar depois. Ao clicar, o cartão chama a função do `App` com seu próprio `id`. O cartão não altera os dados.
+
+**Você deve ver:** três botões. Cada clique abre um alerta com o título e a meta do cartão escolhido; o status continua visível.
+
+**Se der erro:** alerta ao abrir a página indica `onClick={onShowDetails(id)}`. Use `onClick={() => onShowDetails(id)}`. Se aparecer `onShowDetails is not a function`, confira os passos 2 e 3.
+
+### Passo 5 — Envolver a lista em um painel
+
+**Arquivo:** `src/components/Panel.jsx`
+
+**Ação:** crie o arquivo completo:
+
+```jsx
+export default function Panel({ title, children }) {
+  return (
+    <section className="panel">
+      <header className="panel-header">
+        <h2>{title}</h2>
+      </header>
+      <div className="panel-content">{children}</div>
+    </section>
+  );
+}
+```
+
+**O que é:** `children` é o conteúdo colocado entre `<Panel>` e `</Panel>`. O painel conhece sua moldura; a lista continua responsável pelos cartões.
+
+**Arquivo:** `src/App.jsx`
+
+**Ação:** substitua o arquivo inteiro:
+
+```jsx
+import "./App.css";
+import HabitList from "./components/HabitList";
+import Panel from "./components/Panel";
+import { initialHabits } from "./data/habits";
+
+export default function App() {
+  const completedCount = initialHabits.filter(
+    (habit) => habit.completed,
+  ).length;
+
+  function handleShowDetails(habitId) {
+    const habit = initialHabits.find((item) => item.id === habitId);
+
+    if (habit) {
+      const goal = habit.goal === undefined
+        ? "Sem meta definida"
+        : habit.goal;
+      window.alert(`${habit.title} — Meta: ${goal}`);
+    }
+  }
+
+  return (
+    <main className="app">
+      <header className="hero">
+        <p className="eyebrow">MY DAILY HABITS</p>
+        <h1>Pequenos hábitos, progresso visível.</h1>
+        <p>
+          {completedCount} de {initialHabits.length} hábitos concluídos.
+        </p>
+      </header>
+
+      <Panel title="Hábitos de hoje">
+        <HabitList
+          habits={initialHabits}
+          onShowDetails={handleShowDetails}
+        />
+      </Panel>
+    </main>
+  );
+}
+```
+
+**Você deve ver:** o título do painel acima da lista; botões, status e contador continuam funcionando.
+
+**Se der erro:** `Panel is not defined` indica que faltou o `import Panel from "./components/Panel";`.
+
+### Passo 6 — Dar estilo ao painel e aos botões
+
+**Arquivo:** `src/App.css`
+
+**Ação:** substitua o arquivo inteiro:
+
+```css
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+}
+
+.app {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.habit-list {
+  display: grid;
+  gap: 16px;
+}
+
+.habit-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #d7dde5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.habit-card.is-complete {
+  border-color: #78b87a;
+  background: #f0fff2;
+}
+
+.habit-status {
+  font-weight: 700;
+}
+
+.habit-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.habit-actions button {
+  padding: 8px 12px;
+  border: 1px solid #9aa9ba;
+  border-radius: 8px;
+  background: #ffffff;
+  color: inherit;
+  cursor: pointer;
+}
+
+.panel {
+  overflow: hidden;
+  border: 1px solid #d7dde5;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.panel-header,
+.panel-content {
+  padding: 20px;
+}
+
+.panel-header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.panel-header h2 {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .habit-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+```
+
+**O que é:** `panel` cria a moldura, `habit-actions` agrupa status e botão. A regra final deixa o cartão caber em telas estreitas.
+
+**Você deve ver:** lista dentro do painel, três status e três botões legíveis. O contador continua mostrando `1 de 3 hábitos concluídos`.
+
+**Se der erro:** confirme o `import "./App.css";` no topo de `App.jsx` e mantenha `src/index.css` vazio.
+
+---
+
 ## Arquivos que mudam hoje
 
 ```text
 src/
-├── App.jsx                    ← ganha handleShowDetails
+├── App.jsx                    ← cria handleShowDetails e usa Panel
+├── App.css                    ← estilo do painel e do botão
 └── components/
     ├── HabitCard.jsx          ← recebe id e onShowDetails; ganha botão
     ├── HabitList.jsx          ← encaminha o callback
@@ -94,6 +439,7 @@ src/
 
 Rode isto no seu projeto depois da aula:
 
+- [ ] os três cartões continuam mostrando "Concluído" ou "Pendente"
 - [ ] clicar em "Ver detalhes" abre um alerta
 - [ ] o alerta mostra o título e a meta **daquele** cartão, não sempre o mesmo
 - [ ] a lista aparece dentro de um painel com borda e título
