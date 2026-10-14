@@ -113,7 +113,7 @@ Repare que só mudou a **ordem**.
 
 # Nível 2 — Aplicação no projeto
 
-Estes ficam no projeto. Faça commit ao final.
+Estes exercícios são **temporários**. Mantenha o quarto e o quinto hábitos até testar o item 2.4; depois, **remova os acréscimos antes do commit**. A Aula 04 começa com os três hábitos iniciais.
 
 ### 2.1 — Um quarto hábito
 
@@ -123,6 +123,8 @@ Adicione um quarto objeto ao array em `src/data/habits.js`, com `id` único.
 
 **Responda:** por que nenhum arquivo de componente precisou mudar?
 
+**Desfaça antes do commit:** remova o quarto hábito após concluir o item 2.4.
+
 ---
 
 ### 2.2 — Um hábito sem meta
@@ -130,6 +132,8 @@ Adicione um quarto objeto ao array em `src/data/habits.js`, com `id` único.
 Adicione um quinto hábito **sem a propriedade `goal`**.
 
 **Critério:** o cartão mostra "Sem meta definida" e, ao clicar em "Ver detalhes", o alerta mostra a mesma meta. A aplicação não quebra.
+
+**Desfaça antes do commit:** remova o quinto hábito após concluir o item 2.4.
 
 ---
 
@@ -147,6 +151,8 @@ No `App.jsx`, adicione outro `Panel` abaixo do primeiro:
 
 **Responda:** o `Panel` precisou saber que agora existe um parágrafo dentro dele? Por quê?
 
+**Desfaça antes do commit:** remova o painel adicional e mantenha o painel original da lista.
+
 > 💡 É esse desacoplamento que `children` oferece. Sem ele, você precisaria de uma prop nova para cada tipo de conteúdo.
 
 ---
@@ -161,7 +167,9 @@ console.log("Hábito solicitado:", habitId, habit);
 
 Abra o console, clique em cada cartão e confirme que o `id` do console é sempre o do cartão clicado.
 
-**Critério:** cinco cartões, cinco ids diferentes no console.
+**Critério durante o teste:** cinco cartões, cinco ids diferentes no console.
+
+**Desfaça antes do commit:** remova o `console.log` temporário; retire o quarto e o quinto hábitos dos itens 2.1 e 2.2.
 
 Este é o hábito de depuração que vai te salvar nas próximas aulas: **antes de achar que o React está errado, verifique qual dado chegou.**
 
@@ -220,6 +228,10 @@ Escreva de três a cinco linhas. Não existe resposta única; existe raciocínio
 ---
 
 ## Antes de entregar
+
+- [ ] Removi os hábitos extras dos itens 2.1 e 2.2: restam **três hábitos** em `habits.js`.
+- [ ] Removi o segundo `Panel`, o log de teste e as alterações opcionais feitas somente para experimentar.
+- [ ] O `App` voltou ao checkpoint do README da Aula 03, com os botões “Ver detalhes” funcionando.
 
 ```bash
 git add .

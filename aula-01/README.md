@@ -16,7 +16,7 @@ npm -v
 git --version
 ```
 
-- [ ] `node -v` mostra **v20.19 ou superior**, ou **v22.12 ou superior** (instale a versão **LTS** em https://nodejs.org)
+- [ ] `node -v` mostra **v22.22 ou superior** (instale uma versão **LTS compatível** em https://nodejs.org)
 - [ ] `git --version` responde (instale em https://git-scm.com)
 - [ ] VS Code instalado
 - [ ] conta no GitHub (veja o [GUIA-GITHUB.md](../GUIA-GITHUB.md))

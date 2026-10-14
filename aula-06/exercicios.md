@@ -35,11 +35,11 @@ Inicie após o Passo 3 do [README da Aula 06](./README.md). Níveis 1 e 2 obriga
 
 ### 1.4 — Sem array de dependências
 
-**Faça:** retire temporariamente o segundo argumento do Effect de salvar. Acrescente um `console.log` dentro dele e clique duas vezes.
+**Faça:** em `App.jsx`, logo abaixo do `useState` de `habits`, acrescente `const [tick, setTick] = useState(0);` e, dentro do `<header className="hero">`, um botão `<button type="button" onClick={() => setTick(tick + 1)}>tick {tick}</button>`. Coloque `console.log("gravou");` dentro do Effect de salvar. Clique em **tick** três vezes. Depois retire o array de dependências do Effect e clique em **tick** três vezes de novo.
 
-**Observe:** o Effect roda **após toda renderização**. A quantidade de logs pode variar com `StrictMode`.
+**Observe:** com `[habits]`, clicar em “tick” **não** grava: o `App` renderiza, mas `habits` não mudou. **Sem array**, **cada clique grava**: o Effect roda após **toda** renderização. Com `[]`, nem o clique em um cartão grava (só a montagem). *Clicar nos cartões não mostra a diferença, porque cada clique muda `habits`.*
 
-**Desfaça:** retire o log e restaure `[habits]`.
+**Desfaça:** remova o botão, o `tick` e o log, e restaure `[habits]`.
 
 ---
 
@@ -49,7 +49,7 @@ Inicie após o Passo 3 do [README da Aula 06](./README.md). Níveis 1 e 2 obriga
 
 **Faça:** adicione `console.log("loadHabits");` no início de `loadHabits`. Compare `useState(loadHabits)` com `useState(loadHabits())` após dois cliques.
 
-**Observe:** passar a função faz a leitura na **inicialização**; chamar a função entre parênteses a executa em **toda renderização**. Em `StrictMode`, o React pode invocar inicializadores duas vezes em desenvolvimento; a contagem exata não é universal.
+**Observe:** com `useState(loadHabits)`, o número de mensagens **não cresce** com os cliques. Com `useState(loadHabits())`, **cresce a cada renderização**. No desenvolvimento, o `StrictMode` pode chamar o inicializador **duas vezes**: na simulação realizada, a versão correta mostrou 2 mensagens e ficou em 2; a versão com parênteses passou de 2 para 6 depois de dois cliques. A contagem exata não é universal. O que importa é **crescer ou não crescer**.
 
 **Desfaça:** restaure `useState(loadHabits)` e remova o log.
 
